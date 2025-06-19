@@ -11,15 +11,23 @@
     <h2 class="text-2xl text-center text-gray-800 mb-6">Admin login</h2>
     <form action="admin-login" method="post" class="space-y-2">
         @csrf
-        <div>
+        <div> @error('user')
+            <div class="text-red-500">{{$message}}<div>
+            @enderror
             <label for="" class="text-gray-600 mb-1">Admin Name</label>
             <input type="text" name="admin" placeholder="Enter admin name" class="w-full px-4 py-1 border-gray-200 rounded-xl border-1 focus:outline-none">
+            @error('admin')
+            <div class="text-red-500">{{$message}}<div>
+            @enderror
         </div>
         <div>
             <label for="" class="text-gray-600 mb-1">Admin Password</label>
             <input type="password" name="password" placeholder="Enter admin password" class="w-full px-4 py-1 border-gray-200 rounded-xl border-1 outline-0">
+            @error('password')
+            <div class="text-red-500">{{$message}}</div>
+            @enderror
         </div>
-        <button type="submit" class="w-full rounded-xl bg-blue-500 py-1 text-white">Login</button>
+        <button type="submit" class="w-full rounded-xl bg-blue-500 py-1 text-white mt-1">Login</button>
     </form>
 </div>
 </body>
