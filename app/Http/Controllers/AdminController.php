@@ -14,23 +14,27 @@ class AdminController extends Controller
             'password'=>'required'
         ]);
         $admin = Admin::where('name', $request->admin)->where('password',$request->password)->first();
-       if($admin){
-          return redirect('dashboard');
-        //   return view('admin',['name'=>$request->admin]);
-        Session::put('admin',$admin);
-       }
+       
            
        if(!$admin){
           $validation = $request->validate([
             'user'=>'required'
           ],["user.required"=>"user does not exit"]);
        }
+         Session::put('admin',$admin);
+        return redirect('dashboard');
+       
        
     }
 
      function dashboard(){
-      return Session::get('admin');
-     // return $admin;
-         //return view('admin');
+      $admin = Session::get('admin');
+      
+       if($admin){
+         return view('admin',['name'=>$admin->name]);
+       }
+       else{
+        return redirect('admin-login');
+       }
      }
 }
